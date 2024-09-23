@@ -1,0 +1,191 @@
+CLASE 03/10
+
+SELECT COUNT(*) FROM emple;
+
+SELECT COUNT(*), sum(salario) FROM emple; 
+
+SELECT COUNT(*), sum(salario + comision) FROM emple; -- suma solo los no nulos
+
+SELECT COUNT(*), MAX(salario), MIN(salario), AVG(salario) FROM emple;
+
+/* 1)_ listar salario maximo, minimo y promedio de los empleados cuyo salario sea mayor a 2500 y que sean de oficio vendedor
+   2)_ listar los primeros 5 empleados por apellido, oficio, salario, comision y fecha de alta de los empleados que tengan salario entre 2000 y 5000 ordenados por oficio en forma descendente y apellido en forma ascendente*/
+
+SELECT MAX(salario), MIN(salario), AVG(salario) FROM emple WHERE salario < 2500 AND oficio = 'vendedor'; 
+
+SELECT apellido, oficio, salario, comision, fecha_alt FROM emple WHERE salario BETWEEN 2000 AND 5000 ORDER BY oficio DESC, apellido ASC LIMIT 0,5;
+
+
+CLASE 04/10
+
+/* 1. Determinar por cada departamento de los empleados que contengan una letra A en el nombre, la cantidad de empleados y el total de salarios.
+2. Determinar el salario minimo, maximo y promedio por cada oficio.
+3. Mostrar cantidad de empleados, salario total, y salario maximo por cada oficio de los empleados, con un salario superior a 2mil, para aquellos oficios que tengan un salario
+promedio superior a 1500. */
+
+SELECT COUNT(*), SUM(salario), dept_no FROM emple WHERE 'apellido' LIKE '%A%' GROUP BY dept_no;
+
+SELECT MIN(salario), MAX(salario), AVG(salario) FROM emple GROUP BY oficio;
+
+SELECT COUNT(*), SUM(salario), MAX(salario) FROM emple WHERE salario > 2000 GROUP BY oficio HAVING AVG(salario) > 1500;
+
+
+/* Tema nuevo de la clase */
+
+SELECT * FROM emple, depart WHERE emple.dept_no = depart.dept_no AND salario > 2000 AND apellido LIKE '%A%';
+
+-- inner join, left join, right join;
+
+SELECT * FROM emple INNER JOIN depart ON (emple.dept_no = depart.dept_no);
+
+-- son dos formas de hacer lo mismo pero en la segunda queda libre para usar el where y ademas es mas optimo porque es una funcion utilizada solo para eso
+
+SELECT * FROM emple LEFT JOIN depart ON (emple.dept_no = depart.dept_no);
+
+-- left join da prioridad a la tabla de la izquierda con los datos relacionados de la tabla de la derecha tengan o no coincidencias, en cambio el inner join trae solo los datos que coinciden entre las tablas
+
+SELECT * FROM emple RIGHT JOIN depart ON (emple.dept_no = depart.dept_no);
+
+-- right join da prioridad a la tabla de la derecha con los datos relacionados de la tabla de la izquierda tengan o no coincidencias
+
+SELECT * FROM emple LEFT JOIN depart ON (emple.dept_no = depart.dept_no) WHERE depart.dept_no IS NULL;
+
+
+-- Ejercicios
+
+/* 1. listar los empleados de oficio vendedor, mostrando el nombre, departamento y localidad a la que pertenecen
+   2. listar los empleados del departamento ventas ordenado por salario en forma descendente
+   3. determinar la cantidad de empleados que trabajen en una localidad que empiece por la letra M */
+
+
+SELECT oficio, apellido, dnombre, loc FROM emple, depart WHERE oficio = 'VENDEDOR';
+
+SELECT dnombre, apellido, salario FROM emple, depart WHERE dnombre = 'VENTAS' ORDER BY salario DESC;
+
+SELECT loc, COUNT(apellido) FROM emple, depart WHERE loc LIKE 'M_%';
+
+
+clase 11/10
+
+Distinct: sirve para devolver los distintos valores de un campo o un atributo en una tabla.
+Inner Join: para devolver atributos unidos con los de otra tabla que seleccionemos
+
+SELECT d.dnombre, MIN(salario), MAX(salario), AVG(salario) FROM emple AS e INNER JOIN depart AS d ON (e.dept_no = d.dept_no);
+
+SELECT distinct salario FROM emple;
+
+usar YEAR(fecha_alt) para ver el año de la fecha de alta por ejemplo
+usar MONTH(fecha_alt) para ver el mes de la feha de alta por ejemplo
+usar date_format(fecha_alt, '%d-%m-%y') para cambiar el formato de año/mes/dia
+
+d = dia (2)
+m = mes (2)
+y = año (2)
+Y = año (4)
+h = hora (2)
+i = minutos (2)
+s = segundos (2)
+
+usar CURDATE() para obtener la fecha actual
+usar CURTIME() para obtener la hora actual
+
+-- Ejercicios
+
+/* 1. determinar el total de salarios de cada departamento, mostrando el nombre de departamento al que corresponde ordenado de forma ascendente por departamento
+2. mostrar el numero de oficios distintos de cada departamento
+3. determinar la cantidad de empleados por cada oficio que pertenezcan al departamento de ventas
+4. visualizar el numero de empleados de cada localidad
+5. visualizar el departamento con mayor cantidad de empleados */
+
+SELECT d.dnombre, SUM(salario) FROM emple AS e RIGHT JOIN depart AS d ON (e.dept_no = d.dept_no) GROUP BY d.dnombre ORDER BY d.dnombre;
+
+/* 2. SELECT dep.dnombre, COUNT(oficio) FROM emple AS emp RIGHT JOIN depart AS dep ON (emp.dept_no = dep.dept_no) GROUP BY dep.dnombre;
+SELECT dept_no, COUNT(DISTINCT oficio) FROM emple GROUP BY dept_no; */
+
+SELECT a.dnombre, oficio, COUNT(apellido) FROM emple AS b INNER JOIN depart as a ON (b.dept_no = a.dept_no) WHERE a.dnombre = 'VENTAS' GROUP BY oficio;
+
+SELECT x.loc, COUNT(apellido) FROM emple AS y INNER JOIN depart as x ON (y.dept_no = x.dept_no) GROUP BY x.loc;
+
+SELECT dept_no,COUNT(*) as cantidad  from emple group by dept_no ORDER by cantidad DESC limit 1;
+
+
+-- Ejercicios de Subquerys
+
+/* 1. mostrar los datos de los empleados q tengan el mismo oficio que "cerezo" el resultado ordenado por apellido
+2. mostrar los empleados que desempeñen el mismo ofico q gimenez o que tengan un salario mayor o igual que fernandez 
+3. mostrar los datos de los empleados cuyo salario sea mayor que la media de todos los salarios */
+
+SELECT * FROM emple WHERE oficio = (SELECT oficio FROM emple WHERE apellido = 'CEREZO') AND apellido != 'CEREZO';
+
+SELECT * FROM emple WHERE oficio = (SELECT oficio FROM emple WHERE apellido = 'GIMENEZ') OR salario >= (SELECT salario FROM emple WHERE apellido = 'FERN?NDEZ');
+
+SELECT * FROM emple WHERE salario > (SELECT AVG(salario) FROM emple);
+
+•Orden de las funciones
+
+1.	select
+2.	from
+3.	join
+4.	where
+5.	group by
+6.	having
+7.	order by
+8.	limit
+
+
+clase 17/10
+
+update se utiliza para actualizar un item de la tabla
+set es para setear lo que queremos cambiar
+
+UPDATE emple SET salario = salario * 1.10;
+
+delete es para eliminar contenido de una tabla
+
+DELETE FROM emple WHERE emp_no = 7934;
+
+-- Repaso de lo anterior
+
+SELECT depart.dnombre, COUNT(*) AS cantidad 
+FROM emple
+INNER JOIN depart ON (depart.dept_no = emple.dept_no)
+WHERE emple.oficio = 'EMPLEADO' -- (SELECT oficio FROM emple WHERE apellido = 'JIMENO')
+GROUP BY emple.dept_no
+HAVING COUNT(*)>=1
+ORDER BY depart.dnombre DESC
+LIMIT 0,3 ;
+
+lo que este entre parentesis se ejecuta antes que el select principal
+nunca puede haber having si no existe un group by
+
+-- Ejercicios
+
+/* 1. Listar los empleados que tengan salario superior a $2000 o que sean de oficio vendedor, ordenados alfabeticamente por apellido
+2. Obtener la cantidad de empleados, el salario max, min, avg y nombre de departamento de cada departamento
+3. modificar las comisiones de los empleados de oficio ventas a 20% 
+4. listar apellido y oficio de los empleados que trabajen en el mismo departamento que "TOVAR" 
+5. obtener los 2 oficios que tengan mayor cantidad de empleados */
+
+SELECT * FROM emple;
+
+SELECT * FROM emple WHERE salario > 2000 OR oficio = 'VENDEDOR' ORDER BY apellido;
+
+SELECT COUNT(apellido), MAX(salario), MIN(salario), AVG(salario), depart.dnombre
+FROM emple INNER JOIN depart ON (depart.dept_no = emple.dept_no);
+
+UPDATE emple SET comision = comision * 1.20 WHERE oficio = 'VENDEDOR';
+
+SELECT apellido, oficio FROM emple WHERE dept_no = (SELECT dept_no FROM emple WHERE apellido = 'TOVAR');
+
+SELECT * FROM depart;
+
+SELECT oficio, COUNT(apellido) FROM emple GROUP BY oficio ORDER BY COUNT(oficio) DESC LIMIT 2; 
+
+18/10/22
+
+-Aumentar el salario de los empleados de contabilidad un 20%.
+
+UPDATE emple LEFT JOIN depart USING (dept_no)
+SET salario = salario * 1.20, loc = CONCAT (loc, '-')
+WHERE dnombre = 'CONTABILIDAD'
+
