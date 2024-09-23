@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Manager</title>
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+</head>
+<body>
+    <div class="form-wrapper">
+        <div class="form-container">
+			<h1>Registrarse</h1>
+			<form name="usuario" action="../paginas/cargaUsuarios.php" method="get">
+
+                <label for="DNI-Usuario">Dni:</label>
+				<input type="text" name="DNI-Usuario" placeholder="Ingrese su dni">   
+
+				<label for="Nombre">Nombre:</label>
+				<input type="text" name="Nombre" placeholder="Ingrese su nombre">
+
+				<label for="Apellido">Apellido:</label>
+				<input type="text" name="Apellido" placeholder="Ingrese su apellido">
+
+				<label for="Telefono">Telefono:</label>
+				<input type="text" name="Telefono" placeholder="Ingrese su telefono">
+
+				<label for="Email">Email:</label>
+				<input type="text" name="Email" placeholder="Ingrese su email">
+
+				<label for="Contraseña">Contraseña:</label>
+				<input type="text" name="Contraseña" placeholder="Ingrese una contraseña">
+
+				<label for="Domicilio">Domicilio:</label>
+				<input type="text" name="Domicilio" placeholder="Ingrese su domicilio">
+
+				<input type="submit" name="envia" value="Registro">
+
+				<a href="../index.html"><input type="button" value="Tiene cuenta?, Inicie Sesion"></a>
+			</form>
+        </div>
+    </div>
+</body>
+</html>
