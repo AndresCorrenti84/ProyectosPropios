@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: blue;
+    background-image: url(./img/paisaje.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.imgLogos-uno{
+    margin: 0 900px 0 50px;
+}
+
+footer{
+    margin-top: 200px;
+}

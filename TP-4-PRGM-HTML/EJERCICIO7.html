@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Champagnat</title>
+
+</head>
+<body style="background-color: rgb(47, 235, 63); color: black;">
+    
+    <h1 id="titulo-1" style="text-align: center;"><b><u>Univesidad Champagnat</u></b></h1>
+
+    <h2 id="subtitulo-1" style="text-align: center;"><i>Facultad de Informática</i></h2> <br>
+
+    <h2 id="subtitulo-1" style="text-align: center;">Encuesta de Preferencias Vacacionales</h2> <br>
+
+    <center>
+    <form>
+        <table>
+            <tr>
+                <td><label for="nombre">Nombre (persona a cargo):</label></td>
+                <td><input type="text" id="nombre" name="nombre" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email (persona a cargo):</label></td>
+                <td><input type="email" id="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="Actividades">Lugares de preferencia:</label></td>
+                <td>
+                    <ul>
+                        <li><input type="checkbox" name="Actividades[]" value="Playa"> Playa</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Montaña"> Montaña</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Ciudad"> Ciudad</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="edades">Época del año preferida:</label></td>
+                <td>
+                    <select name="edades" id="edades" required>
+                        <option value="Verano">Verano</option>
+                        <option value="Invierno">Invierno</option>
+                        <option value="Otoño">Otoño</option>
+                        <option value="Primavera">Primavera</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Cantidad">Cantidad de estadia (en dias):</label></td>
+                <td>
+                    <select name="Cantidad" id="Cantidad" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Actividades">Modo de Actividades:</label></td>
+                <td>
+                    <ul>
+                        <li><input type="checkbox" name="Actividades[]" value="Auto"> Auto</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Colectivo"> Colectivo</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Avion"> Avion</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="edades">edades estimado (entre):</label></td>
+                <td>
+                    <select name="edades" id="edades" required>
+                        <option value="a">100 - 1000</option>
+                        <option value="b">1000 - 10000</option>
+                        <option value="c">10000 - 100000</option>
+                        <option value="d">100000 - 1000000</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Cantidad">Cantidad de pasajeros:</label></td>
+                <td>
+                    <select name="Cantidad" id="Cantidad" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="edades">Edades (entre):</label></td>
+                <td>
+                    <select name="edades" id="edades" required>
+                        <option value="e">1 - 10</option>
+                        <option value="f">10 - 20</option>
+                        <option value="g">20 - 30</option>
+                        <option value="h">30 - 40</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Actividades">Actividades complementarias:</label></td>
+                <td>
+                    <ul>
+                        <li><input type="checkbox" name="Actividades[]" value="Tour Guiado"> Tour Guiado</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Cena Lujosa"> Cena Lujosa</li>
+                        <li><input type="checkbox" name="Actividades[]" value="Rentar Auto"> Rentar Auto</li>
+                    </ul>
+                </td>
+            </tr>
+
+        </table>
+        <br>
+        <input type="submit" value="Enviar Encuesta">
+    </form>
+
+</body>
+</html>

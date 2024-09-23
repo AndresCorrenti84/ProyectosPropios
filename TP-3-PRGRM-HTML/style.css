@@ -1,0 +1,47 @@
+body{
+    background-color: blue;
+}
+
+.imagenRight{
+    position: absolute;
+    right: 0;
+}
+
+.imagenLeft{
+    position: absolute;
+    left: 0;
+}
+.titulo{
+    
+    text-align: center;
+    color: white;
+    
+}
+.subtitulo{
+    text-align: center;
+    color: white;
+}
+.contenido{
+    display: grid;
+    margin-top: 10%;
+    justify-content: space-around;
+}
+.textVinculos{
+    text-decoration: none;
+    color: white;
+    margin-top: 10%;
+}
+p{
+    color: white;
+}
+
+.textTitulo{
+    text-align: center;
+}
+bttn{
+    color: rgb(248, 0, 0);
+    text-align: center;
+}
+.formulario{
+    text-align: center;
+}
